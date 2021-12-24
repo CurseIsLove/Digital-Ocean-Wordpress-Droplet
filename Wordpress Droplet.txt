@@ -1,0 +1,48 @@
+https://youtu.be/28wACflKTaM
+
+1. create a wordpress droplet. .. change dns in cloudfare and change domain settings in digitalocean
+2. login through ssh
+3. setup without certificate then after completing
+4. open terminal and type { nano /etc/mysql/debian.cnf }
+& copy the password and store it somewhere.
+5. go to https://bmtechtips.com/how-to-install-setup-apache-mysql-php-lamp-stack-on-ubuntu-20-04.htm and follow steps from step 2 then step 4 when doing mysql secure installation do N for validate password component and in pssword put the copied password after completing step 6 wait dont do phpmyadmin still
+6. first :- mysql -u root -p
+    second:- enter password
+    third:- use mysql
+    fourth:- SELECT user FROM user;    check if debian-sys-maint user exist or not if it exists good if not (CREATE USER 'debian-sys-maint'@'localhost' IDENTIFIED BY 'passwordyoucoppied';) then
+    fifith:- GRANT ALL PRIVILEGES ON * . * TO 'debian-sys-maint'@'localhost';
+             then FLUSH PRIVILEGES;
+    sixth:- CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'passwordyoucoppied';   
+              then GRANT ALL PRIVILEGES ON * . * TO 'phpmyadmin'@'localhost';
+              then FLUSH PRIVILEGES;
+    seventh :- CREATE DATABASE phpmyadmin;
+    eighth:- GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'phpmyadmin'@'localhost'; 
+                 then FLUSH PRIVILEGES;
+    ninth:- GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'debian-sys-maint'@'localhost';
+             then FLUSH PRIVILEGES;
+    tenth :- exit
+7. now proceed the 7th step of installing phpmyadmin when asks for password paste the copied password in short use that password everywhere after completing without error then do step 8th create a user then after completing follow the next step zip unzip then done the work here now
+
+8. upload .htaccess through filezilla in /var/www/html
+9. through ftp give read write permission in group and public to .htaccess
+
+8. open wp through wp-admin
+9. install plugin flexible ssl for cloudfare
+10. install plugin really simple ssl
+
+12. update wordpress
+
+13.phpmyadmin will take update for that login through filezilla go to usr share something then phpmyadmin delete that folder and upoad the zip of new version there then unzip through terminal
+
+14. https://youtu.be/28wACflKTaM
+last step of the video do
+
+g=In filezilla go to /etc/php/current version(u can check in phpmyadmin dashboard the version of current php)/ apache2/ php.ini
+download the file and edit these values 
+
+memory_limit = 512M
+post_max_size = any big value
+upload_max_filesize = any big value(same)  
+then upload the file
+
+then restart = sudo service apache2 restart ///// service apache2 restart
